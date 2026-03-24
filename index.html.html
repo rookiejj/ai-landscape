@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 주도 기업 10선 — 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#0d0d0f;--bg2:#131316;--bg3:#1a1a1f;--bg4:#222228;
+    --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);
+    --text:#f0eff5;--text2:#9998a8;--text3:#5e5d6e;
+    --accent:#7c6fff;--accent2:#a89bff;
+    --b-llm:#1e3a5f;--t-llm:#93c5fd;
+    --b-img:#14532d;--t-img:#86efac;
+    --b-vid:#431407;--t-vid:#fdba74;
+    --b-agt:#2e1065;--t-agt:#c4b5fd;
+    --b-hw:#1c1c24;--t-hw:#94a3b8;
+    --b-code:#500724;--t-code:#f9a8d4;
+    --b-sci:#042f2e;--t-sci:#5eead4;
+    --b-ui:#1a2e1a;--t-ui:#bbf7d0;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-serif;font-weight:400;min-height:100vh;-webkit-font-smoothing:antialiased;}
+
+  header{padding:56px 40px 40px;border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
+  header::before{content:'';position:absolute;top:-60px;left:-80px;width:400px;height:400px;background:radial-gradient(circle,rgba(124,111,255,0.12) 0%,transparent 70%);pointer-events:none;}
+  header::after{content:'';position:absolute;bottom:-40px;right:10%;width:300px;height:300px;background:radial-gradient(circle,rgba(45,212,191,0.07) 0%,transparent 70%);pointer-events:none;}
+  .header-label{font-family:'Syne',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.18em;color:var(--accent2);text-transform:uppercase;margin-bottom:14px;}
+  h1{font-family:'Syne',sans-serif;font-size:clamp(28px,4vw,48px);font-weight:800;line-height:1.15;letter-spacing:-0.02em;margin-bottom:10px;}
+  .header-sub{font-size:14px;color:var(--text2);line-height:1.7;max-width:580px;}
+  .header-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;}
+  .date-badge{font-size:11px;padding:4px 12px;border-radius:999px;background:var(--bg4);border:1px solid var(--border2);color:var(--text3);}
+  .update-badge{font-size:11px;padding:4px 12px;border-radius:999px;background:rgba(124,111,255,0.12);border:1px solid rgba(124,111,255,0.25);color:var(--accent2);}
+
+  .toolbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:16px 40px;border-bottom:1px solid var(--border);background:rgba(19,19,22,0.92);position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);}
+  .filter-label{font-size:11px;color:var(--text3);letter-spacing:0.08em;text-transform:uppercase;margin-right:4px;white-space:nowrap;}
+  .tag{font-size:12px;font-weight:500;padding:5px 14px;border-radius:999px;border:1px solid var(--border2);color:var(--text2);cursor:pointer;background:transparent;transition:all 0.18s;font-family:'Noto Sans KR',sans-serif;}
+  .tag:hover{border-color:rgba(255,255,255,0.25);color:var(--text);}
+  .tag.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+
+  main{padding:28px 40px 80px;}
+  .company-block{display:grid;grid-template-columns:72px 200px 1fr;border:1px solid var(--border);border-radius:16px;margin-bottom:14px;background:var(--bg2);overflow:hidden;transition:border-color 0.2s,transform 0.2s;animation:fadeUp 0.35s ease both;}
+  .company-block:hover{border-color:var(--border2);transform:translateY(-1px);}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+
+  .col-rank{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:22px 0;border-right:1px solid var(--border);background:var(--bg3);}
+  .rank-num{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--text3);line-height:1;}
+
+  .col-company{padding:18px 18px 18px 22px;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:7px;min-width:0;}
+  .co-name{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;letter-spacing:-0.01em;}
+  .co-name a{color:var(--text);text-decoration:none;transition:color 0.15s;display:inline-flex;align-items:center;gap:5px;}
+  .co-name a:hover{color:var(--accent2);}
+  .co-name a .ext{font-size:11px;opacity:0;transition:opacity 0.15s;color:var(--accent2);}
+  .co-name a:hover .ext{opacity:1;}
+  .co-type{font-size:11px;color:var(--text3);line-height:1.5;}
+  .co-focus{margin-top:4px;font-size:11px;padding:4px 10px;border-radius:6px;background:var(--bg4);color:var(--accent2);display:inline-block;line-height:1.4;border:1px solid rgba(124,111,255,0.2);word-break:keep-all;}
+
+  .col-products{padding:18px 22px;}
+  .prod-item{padding:11px 0;border-bottom:1px solid var(--border);}
+  .prod-item:last-child{border-bottom:none;padding-bottom:0;}
+  .prod-item:first-child{padding-top:0;}
+  .prod-header{display:flex;align-items:flex-start;gap:7px;flex-wrap:wrap;margin-bottom:5px;}
+
+  .prod-name-link{font-size:13px;font-weight:500;font-family:'Syne',sans-serif;letter-spacing:-0.01em;color:var(--text);text-decoration:none;display:inline-flex;align-items:center;gap:4px;transition:color 0.15s;}
+  .prod-name-link:hover{color:var(--accent2);}
+  .prod-name-link .ext{font-size:10px;opacity:0;transition:opacity 0.15s;color:var(--accent2);}
+  .prod-name-link:hover .ext{opacity:1;}
+
+  .new-dot{display:inline-block;font-size:10px;padding:1px 7px;border-radius:999px;background:rgba(45,212,191,0.15);color:#2dd4bf;border:1px solid rgba(45,212,191,0.3);vertical-align:middle;margin-left:2px;}
+  .prod-desc{font-size:12.5px;color:var(--text2);line-height:1.75;word-break:keep-all;}
+
+  .badge{display:inline-flex;align-items:center;font-size:10.5px;font-weight:500;padding:2px 8px;border-radius:999px;white-space:nowrap;}
+  .b-llm{background:var(--b-llm);color:var(--t-llm);}
+  .b-img{background:var(--b-img);color:var(--t-img);}
+  .b-vid{background:var(--b-vid);color:var(--t-vid);}
+  .b-agt{background:var(--b-agt);color:var(--t-agt);}
+  .b-hw{background:var(--b-hw);color:var(--t-hw);}
+  .b-code{background:var(--b-code);color:var(--t-code);}
+  .b-sci{background:var(--b-sci);color:var(--t-sci);}
+  .b-ui{background:var(--b-ui);color:var(--t-ui);}
+
+  .empty{text-align:center;padding:80px 20px;color:var(--text3);font-size:14px;}
+
+  .legend{display:flex;flex-wrap:wrap;gap:10px;padding:14px 40px;border-top:1px solid var(--border);background:var(--bg2);}
+  .legend-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text3);}
+
+  @media(max-width:900px){header,main,.toolbar,.legend{padding-left:20px;padding-right:20px;}.company-block{grid-template-columns:48px 160px 1fr;}.rank-num{font-size:20px;}}
+  @media(max-width:640px){.company-block{grid-template-columns:1fr;}.col-rank{flex-direction:row;padding:12px 16px;gap:8px;border-right:none;border-bottom:1px solid var(--border);}.col-company{border-right:none;border-bottom:1px solid var(--border);}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-label">2026 · AI Landscape</div>
+  <h1>AI 주도 기업 10선</h1>
+  <p class="header-sub">2026년 3월 기준, AI 개발·인프라·통합을 주도하는 핵심 기업과 프로그램·제품 총망라. <span style="color:var(--accent2)">NEW</span> 표시는 2026년 3월 신규 출시·업데이트 항목. 기업명 및 제품명 클릭 시 공식 페이지로 이동.</p>
+  <div class="header-meta">
+    <span class="date-badge">Updated: March 23, 2026</span>
+    <span class="update-badge">✦ Google Stitch · NVIDIA GTC 2026 · OpenAI Superapp · MS Copilot Tasks · Meta Manus · Apple Siri 반영</span>
+  </div>
+</header>
+
+<nav class="toolbar" id="toolbar">
+  <span class="filter-label">필터</span>
+  <button class="tag active" data-cat="all">전체</button>
+  <button class="tag" data-cat="llm">LLM</button>
+  <button class="tag" data-cat="img">이미지</button>
+  <button class="tag" data-cat="vid">비디오</button>
+  <button class="tag" data-cat="agt">에이전트</button>
+  <button class="tag" data-cat="code">코딩</button>
+  <button class="tag" data-cat="ui">UI 디자인</button>
+  <button class="tag" data-cat="hw">하드웨어</button>
+  <button class="tag" data-cat="sci">과학 AI</button>
+</nav>
+
+<main id="main"></main>
+
+<footer class="legend">
+  <div class="legend-item"><span class="badge b-llm">LLM</span>언어 모델</div>
+  <div class="legend-item"><span class="badge b-img">이미지</span>이미지 생성</div>
+  <div class="legend-item"><span class="badge b-vid">비디오</span>동영상 생성</div>
+  <div class="legend-item"><span class="badge b-agt">에이전트</span>자율 에이전트</div>
+  <div class="legend-item"><span class="badge b-code">코딩</span>코드 특화</div>
+  <div class="legend-item"><span class="badge b-ui">UI 디자인</span>UI/디자인 AI</div>
+  <div class="legend-item"><span class="badge b-hw">하드웨어</span>AI 칩·인프라</div>
+  <div class="legend-item"><span class="badge b-sci">과학AI</span>과학·연구 AI</div>
+</footer>
+
+<script>
+const BL={llm:"LLM",img:"이미지",vid:"비디오",agt:"에이전트",hw:"하드웨어",code:"코딩",sci:"과학AI",ui:"UI 디자인"};
+
+const data=[
+{rank:1,name:"OpenAI",url:"https://openai.com",type:"AI 전문 기업",focus:"범용 AGI 개발",products:[
+  {name:"GPT-5.4 / GPT-5.4 Pro",url:"https://openai.com/index/gpt-4-5/",isNew:false,badges:["llm","agt"],desc:"2026년 최전선 플래그십. Standard·Thinking·Pro 3단계. 100만 토큰 컨텍스트 윈도우. OSWorld-V 75%(인간 기준선 72.4% 초과). Artificial Analysis Index 공동 1위(57점). 쿼리 복잡도에 따라 추론 깊이 자동 조절."},
+  {name:"GPT-5.4 mini",url:"https://openai.com/chatgpt/",isNew:true,badges:["llm"],desc:"2026년 3월 출시. Free·Go 사용자 대상 'Thinking' 기능으로 제공. 유료 사용자의 GPT-5.4 사용량 초과 시 폴백 모델로 동작. 경량·고속 추론으로 대중 접근성 확대."},
+  {name:"o3 / o4-mini (Reasoning 시리즈)",url:"https://openai.com/o3",isNew:false,badges:["llm"],desc:"'더 오래 생각'하도록 강화학습 훈련된 추론 전용 시리즈. 이미지 추론·수학·논리 복합 문제 특화. Thinking 레벨 슬라이더(Light→Extended) 제공."},
+  {name:"Codex (에이전틱 코딩 플랫폼)",url:"https://openai.com/index/introducing-codex/",isNew:false,badges:["code","agt"],desc:"GPT-5.1 Codex Max·GPT-5.3 Codex Spark 포함 자율 코딩 플랫폼. 장시간 독립 실행, 멀티 파일 수정, 대형 코드베이스 리팩토링. Cerebras 칩 기반 Spark 버전은 추론 속도 극대화."},
+  {name:"ChatGPT Desktop 슈퍼앱",url:"https://openai.com/chatgpt/download/",isNew:true,badges:["agt"],desc:"ChatGPT + Codex + Atlas 브라우저를 단일 데스크톱 앱으로 통합 예정. 제품 파편화 해소 목적. 데스크톱이 핵심 허브로 전환. 주간 활성 사용자 9억 명, 기업가치 $8,400억 돌파."},
+  {name:"ChatGPT 쇼핑 / Deep Research",url:"https://openai.com/chatgpt/",isNew:false,badges:["agt"],desc:"쇼핑: Walmart·Target·Etsy 직접 구매 연동. Deep Research: 자율 웹탐색 리서치·보고서 생성. Interactive Learning: 수학·과학 70개+ 주제 실시간 공식 조작 모듈."},
+  {name:"DALL-E 3",url:"https://openai.com/index/dall-e-3/",isNew:false,badges:["img"],desc:"텍스트→고품질 이미지 생성, ChatGPT 통합. 프롬프트 이해도 대폭 개선, 안전 필터 내장."},
+  {name:"Sora",url:"https://sora.com",isNew:false,badges:["vid"],desc:"텍스트·이미지→동영상 생성. 현실적 물리 법칙 시뮬레이션 구현. ChatGPT 메인 인터페이스 직접 통합 예정으로 접근성 대폭 향상."},
+  {name:"Project Stargate",url:"https://openai.com/index/announcing-the-stargate-project/",isNew:false,badges:["hw"],desc:"MS·Oracle·SoftBank와의 $5,000억 AI 인프라 합작. 미국 5개 대형 데이터센터 구축. Amazon과 별도 $1,000억 컴퓨팅 협약(2026년 3월). NVIDIA Vera Rubin 수백만 개 탑재 목표."}
+]},
+{rank:2,name:"Anthropic",url:"https://anthropic.com",type:"AI 안전 전문 기업",focus:"안전·신뢰 기반 엔터프라이즈 AI",products:[
+  {name:"Claude Opus 4.6",url:"https://claude.ai",isNew:false,badges:["llm","code"],desc:"2026년 플래그십. SWE-Bench Verified 80.8%로 GPT-5.4(77.2%) 상회, 코딩 에이전트 1위. 100만 토큰 컨텍스트 윈도우(베타). MS PowerPoint·Excel 애드인으로 탑재. 연간 매출 $190억 접근."},
+  {name:"Claude Sonnet 4.6",url:"https://claude.ai",isNew:false,badges:["llm","code"],desc:"Claude.ai 기본 무료 모델(2/17 기본화). API $3/$15(100만 토큰). Claude Code 사용자의 59%가 Opus보다 선호. 엔터프라이즈 코딩 시장 점유율 50% 기여."},
+  {name:"Claude Code",url:"https://docs.anthropic.com/en/docs/claude-code/overview",isNew:false,badges:["code","agt"],desc:"개발자 전용 코딩 에이전트 플랫폼. 엔터프라이즈 AI 코딩 시장 50%+ 점유. 멀티 에이전트 병렬 처리. 미 국방부 계약 거부 → Claude App Store 1위 등극."},
+  {name:"MCP (Model Context Protocol)",url:"https://modelcontextprotocol.io",isNew:false,badges:["agt"],desc:"AI 에이전트 간 통신 표준 프로토콜. Linux Foundation 오픈 거버넌스 이관. Google A2A·IBM ACP와 함께 멀티 에이전트 생태계 핵심 표준. Google Stitch·Cursor 등이 MCP로 연동."},
+  {name:"메모리 기능 + 엔터프라이즈 플러그인",url:"https://claude.ai",isNew:true,badges:["agt"],desc:"메모리(3월 전체 롤아웃): 대화 간 컨텍스트·선호도 기억 유지. 엔터프라이즈 커스터마이저블 플러그인: 기업 소프트웨어 내에서 태스크 자율 실행. 장기 작업 연속성 및 개인화 강화."}
+]},
+{rank:3,name:"Google DeepMind",url:"https://deepmind.google",type:"AI 연구 + 빅테크",focus:"멀티모달·과학 AI 통합",products:[
+  {name:"Gemini 3.1 Pro",url:"https://gemini.google.com",isNew:false,badges:["llm","agt"],desc:"Artificial Analysis Index 공동 1위(57점). 추론 기본 내장(Deep Think 상시). 실시간 60fps 비디오 처리, 멀티모달 최강. 구글 검색 'AI Mode' 통합. Apple Siri 리뉴얼에 Gemini 모델 공급 계약."},
+  {name:"Gemini 3.1 Flash / Flash-Lite",url:"https://ai.google.dev/gemini-api/docs/models",isNew:true,badges:["llm"],desc:"Flash-Lite(2026.3): 이전 대비 2.5배 빠른 응답, 입력 100만 토큰당 $0.25. Flash: 구글 검색 전 세계 롤아웃 완료. Samsung Galaxy와 협력해 멀티스텝 모바일 AI 에이전트 시연."},
+  {name:"Stitch (AI UI 디자인 캔버스)",url:"https://stitch.withgoogle.com",isNew:true,badges:["ui","code","agt"],desc:"2026년 3월 19일 대규모 리디자인 공개. 자연어·음성·이미지·코드 → 고품질 UI 자동 생성. AI 네이티브 무한 캔버스 + 디자인 에이전트. Claude Code·Cursor·Gemini CLI와 MCP 서버로 직접 연동. Figma 주가 당일 8% 급락. 월 350회 무료, HTML/CSS 및 Figma 익스포트."},
+  {name:"Veo 3",url:"https://deepmind.google/technologies/veo/",isNew:false,badges:["vid"],desc:"최상위 동영상 생성 모델. 텍스트/이미지→고품질 동영상. 현실적 물리 법칙 시뮬레이션. Sora와 함께 비디오 AI 양강 구도."},
+  {name:"Imagen / Nano Banana 2",url:"https://deepmind.google/technologies/imagen-3/",isNew:false,badges:["img"],desc:"Gemini 3 기반 최상위 이미지 생성·편집. 캐릭터 일관성 유지, 고정밀 편집 특화. Nano Banana Pro → Nano Banana 2로 진화. 구글 전 제품 통합."},
+  {name:"AlphaFold 3 / AlphaEvolve",url:"https://alphafold.ebi.ac.uk",isNew:false,badges:["sci"],desc:"AlphaFold 3: 단백질·DNA·소분자 상호작용 예측. AlphaEvolve: Gemini 기반 알고리즘 발견. NVIDIA와 공동 개발한 MuJoCo-Warp: 로보틱스 ML 워크로드 70배 가속."},
+  {name:"Gemini CLI / Vertex AI",url:"https://cloud.google.com/vertex-ai",isNew:false,badges:["code","agt"],desc:"Gemini CLI: 개발자용 오픈소스 AI 에이전트. Vertex AI: 엔터프라이즈 맞춤 모델 구축. Google Cloud AI 매출 $150억+(2025년)."}
+]},
+{rank:4,name:"xAI",url:"https://x.ai",type:"AI 전문 기업 (Elon Musk)",focus:"진실 추구·추론 특화 AI",products:[
+  {name:"Grok 4.1",url:"https://x.ai/grok",isNew:false,badges:["llm"],desc:"LMArena Text Arena 1위(Elo 1483). 고EQ + 강력한 논리 결합. 'Think'·'Big Brain' 고급 추론 모드. X Premium+ 제공. Colossus 슈퍼컴퓨터 기반 훈련."},
+  {name:"Grok 4 시리즈",url:"https://x.ai/grok",isNew:false,badges:["llm","agt"],desc:"Grok 3 대비 10배 컴퓨팅 투입. ARC-AGI v2 15.9% SOTA, Humanity's Last Exam 25.4%. DeepSearch(자율 웹탐색) 내장, 이미지 분석 강화."},
+  {name:"Grok 3 / Grok 3 Reasoning / Grok 3 mini",url:"https://x.ai/grok",isNew:false,badges:["llm"],desc:"추론 전용 Reasoning 변종 포함 3종 라인업. Big Brain 모드로 복잡한 다단계 추론. X 플랫폼 실시간 데이터 접근."}
+]},
+{rank:5,name:"Meta AI",url:"https://ai.meta.com",type:"빅테크 (오픈소스 전략)",focus:"오픈소스 AI 민주화",products:[
+  {name:"Llama 4 (Scout / Maverick)",url:"https://llama.meta.com",isNew:false,badges:["llm","agt"],desc:"멀티모달 오픈소스 최신작. Scout: 경량·고효율, Maverick: 대형 추론. 자유 배포·파인튜닝. Hugging Face 누계 3.5억+ 다운로드. 차세대 모델 'Avocado' 내부 개발 중."},
+  {name:"Meta AI (소비자 어시스턴트)",url:"https://ai.meta.com",isNew:false,badges:["agt"],desc:"Instagram·WhatsApp·Facebook·Messenger 통합. 5억 사용자 돌파. 콘텐츠 추천·광고 최적화·이미지 생성 제공. Ray-Ban Meta 스마트 글라스 'Hear Better' AI 기능 추가."},
+  {name:"Manus AI (자율 에이전트)",url:"https://ai.meta.com/blog/",isNew:true,badges:["agt"],desc:"2025년 말 인수한 자율 에이전트 기술. 2026년 2월 Ads Manager에 직접 통합. 시장 조사·보고서 작성·캠페인 분석 등 멀티스텝 태스크 자동 실행."},
+  {name:"Segment Anything Model 2 (SAM 2)",url:"https://ai.meta.com/sam2/",isNew:false,badges:["img"],desc:"이미지·비디오 내 임의 객체 실시간 분리 오픈소스 모델. 의료 영상·AR/VR·자율주행 활용."}
+]},
+{rank:6,name:"Microsoft",url:"https://microsoft.com/en-us/ai",type:"빅테크 (AI 통합 전략)",focus:"생산성 AI 전면 통합",products:[
+  {name:"Microsoft Copilot (M365 통합)",url:"https://copilot.microsoft.com",isNew:false,badges:["agt","code"],desc:"Word·Excel·Outlook·Teams·Windows·Azure 전 제품군 AI화. 멀티 에이전트 오케스트레이션으로 복잡 업무 자동화. Anthropic에 $50억 추가 투자. Azure AI 성장률 34% YoY."},
+  {name:"Copilot Tasks",url:"https://copilot.microsoft.com",isNew:true,badges:["agt"],desc:"2026년 2월 리서치 프리뷰 공개. 클라우드 호스팅 컴퓨터에서 자율 실행되는 백그라운드 영구 에이전트. 자연어로 목표 기술 시 스케줄링·구독 관리·모니터링·콘텐츠 초안을 독립 처리."},
+  {name:"MAI-Image-2",url:"https://microsoft.com/en-us/ai",isNew:true,badges:["img"],desc:"2026년 3월 출시. Microsoft 슈퍼인텔리전스 팀 개발 자체 텍스트→이미지 모델. 이전 대비 현실감·조명·텍스트 렌더링 대폭 개선. 포스터·인포그래픽 실무 최적화."},
+  {name:"Azure OpenAI Service",url:"https://azure.microsoft.com/en-us/products/ai-services/openai-service",isNew:false,badges:["llm","agt"],desc:"OpenAI 최신 모델을 기업 환경에서 안전하게 활용하는 완전관리형 클라우드 플랫폼. 준법감시·보안 강화. 대기업 AI 채택의 핵심 채널."},
+  {name:"Phi-4 / Phi-4 Multimodal / Fara-7B",url:"https://azure.microsoft.com/en-us/products/phi",isNew:false,badges:["llm"],desc:"Phi-4: 3.8B~5.6B 경량 멀티모달 모델. Fara-7B: 브라우저 에이전트·컴퓨터 제어 특화 소형 모델(오픈소스). 엣지·온프레미스 배포 특화."},
+  {name:"MAI-DxO (의료 진단 AI)",url:"https://microsoft.com/en-us/research/project/health-futures/",isNew:false,badges:["sci"],desc:"복잡 의료 케이스 정확도 85.5%(경험 많은 의사 평균 20% 대비). Bing·Copilot 하루 5천만 건 건강 Q&A 처리."},
+  {name:"GitHub Copilot / Repository Intelligence",url:"https://github.com/features/copilot",isNew:false,badges:["code"],desc:"월간 PR 4,300만 건(+23% YoY), 연간 커밋 10억 건(+25%). 2026년 'Repository Intelligence': 코드 관계·히스토리·전체 맥락 이해. 오류 조기 감지·자동 수정 가능."}
+]},
+{rank:7,name:"NVIDIA",url:"https://www.nvidia.com/en-us/ai",type:"AI 인프라 기업",focus:"AI 컴퓨팅 + 피지컬 AI 인프라",products:[
+  {name:"Blackwell Ultra (B300)",url:"https://www.nvidia.com/en-us/data-center/technologies/blackwell-architecture/",isNew:false,badges:["hw"],desc:"현 주력 GPU. 전 세대 대비 2.5배 빠르고 25배 에너지 효율. 클라우드 GPU 완판 지속. FY2024 매출 $609억(+122% YoY). 시가총액 $5조 돌파."},
+  {name:"Vera Rubin (차세대 슈퍼칩)",url:"https://www.nvidia.com/en-us/data-center/vera-rubin/",isNew:false,badges:["hw"],desc:"2026년 하반기 출시 예정. Vera CPU + Rubin GPU 결합. CES 2026에서 H300 GPU 상세 공개. Project Stargate 핵심 하드웨어. Vera Rubin Ultra는 2027년 예정."},
+  {name:"Isaac GR00T N1.7 / GR00T N2",url:"https://developer.nvidia.com/isaac/gr00t",isNew:true,badges:["agt","sci"],desc:"GTC 2026(3/18) 발표. 세계 최초 오픈 휴머노이드 로봇 파운데이션 모델. N1.7: 상업 라이선스 얼리 액세스. N2(2026년 말 예정): 새로운 태스크 성공률 2배 이상. Agility·Figure·Boston Dynamics·1X 등 채택."},
+  {name:"Cosmos 월드 모델 / Isaac Sim 3.0",url:"https://developer.nvidia.com/isaac/sim",isNew:true,badges:["agt","sci"],desc:"GTC 2026 발표. Cosmos: 물리 세계 시뮬레이션 AI — 실제 장면 하나에서 수천 개의 합성 훈련 데이터 자동 생성. Isaac Sim/Lab 3.0: 디지털 트윈 환경에서 로봇 병렬 학습. ABB·FANUC·KUKA 채택."},
+  {name:"DGX Spark (개인용 AI 슈퍼컴퓨터)",url:"https://www.nvidia.com/en-us/products/workstations/dgx-spark/",isNew:true,badges:["hw"],desc:"GTC 2026 공개. 개발자가 로컬에서 GR00T 등 대형 모델을 파인튜닝·배포하는 개인용 AI 슈퍼컴퓨터. 클라우드 비용 없이 온프레미스 AI 개발·에이전트 배포 가능."},
+  {name:"Nemotron 3 Super / NemoClaw / OpenClaw",url:"https://developer.nvidia.com/nemotron",isNew:true,badges:["llm","agt"],desc:"Nemotron 3 Super(GTC 3/11): 120B 파라미터 MoE(활성 12B), SWE-Bench 60.47%(오픈소스 최고). NemoClaw: 오픈소스 에이전트 배포 스택 — 정책 엔진·가드레일·프라이버시 라우팅 통합."},
+  {name:"BioNeMo / Earth-2 / NVIDIA NIM",url:"https://www.nvidia.com/en-us/ai-data-science/products/nim-microservices/",isNew:false,badges:["sci","agt"],desc:"BioNeMo: 생물학·화학 AI 파운데이션. Earth-2: 날씨·기후 예측 AI. NIM: AI 모델 실서비스 배포 마이크로서비스 플랫폼. Nemotron Coalition 6개 모델 패밀리 생태계 구축."}
+]},
+{rank:8,name:"Amazon AWS",url:"https://aws.amazon.com/ai",type:"빅테크 (클라우드 AI)",focus:"엔터프라이즈 클라우드 AI",products:[
+  {name:"Amazon Bedrock",url:"https://aws.amazon.com/bedrock/",isNew:false,badges:["llm","agt"],desc:"Claude·Llama·Titan 등 다수 모델을 단일 API로 제공. Kiro 자율 코딩 에이전트·DevOps Agent·Security Agent 신규 출시(2026). 장기 지속 실행·컨텍스트 기억 지원."},
+  {name:"Trainium3 / Trn3 UltraServer",url:"https://aws.amazon.com/machine-learning/trainium/",isNew:false,badges:["hw"],desc:"2025년 12월 출시. Trainium3 칩 144개 탑재. Trainium2 대비 성능 4배 이상, 에너지 효율 40% 개선."},
+  {name:"Amazon Nova 모델 패밀리",url:"https://aws.amazon.com/ai/generative-ai/nova/",isNew:false,badges:["llm","img"],desc:"AWS 자체 파운데이션 모델. Micro~Pro 다단계 라인업. 텍스트·이미지·비디오 멀티모달 지원."},
+  {name:"AWS 인프라 투자",url:"https://aws.amazon.com/ai/infrastructure/",isNew:false,badges:["hw"],desc:"2026년 설비투자 $2,000억(대부분 AI). 데이터센터 용량 2배(850MW→1.7GW). Andy Jassy: '수요가 공급을 앞지른다.'"}
+]},
+{rank:9,name:"Apple",url:"https://apple.com/apple-intelligence",type:"빅테크 (온디바이스 AI)",focus:"하드웨어-소프트웨어 AI 완전 통합",products:[
+  {name:"Apple Intelligence",url:"https://apple.com/apple-intelligence",isNew:false,badges:["llm","agt"],desc:"iOS 18·macOS Sequoia 내장 개인화 AI. 글쓰기 도구·Image Playground·Genmoji·알림 우선순위. 온디바이스 처리 중심. AI 경쟁사 앱이 App Store에서 2025년 $9억 수수료 납부, 2026년 $10억+ 예상."},
+  {name:"신 Siri + Gemini 연동 (iOS 26)",url:"https://apple.com/siri/",isNew:true,badges:["agt","llm"],desc:"2026년 iOS 26.4와 함께 출시 예정. 화면 인식(On-screen Awareness)·크로스앱 통합 가능한 컨텍스트 인식 어시스턴트로 전면 재설계. Google Gemini(1.2조 파라미터)를 Private Cloud Compute에서 구동, 프라이버시 유지."},
+  {name:"Private Cloud Compute (PCC)",url:"https://security.apple.com/documentation/private-cloud-compute/",isNew:false,badges:["agt","hw"],desc:"온디바이스 처리 불가 요청을 Apple 전용 서버로 전송하는 프라이버시 보호 클라우드 AI 인프라. 서버에 사용자 데이터 미저장. 제3자 보안 감사 가능 설계."},
+  {name:"M5 칩 / Neural Engine / Baltra",url:"https://apple.com/mac/",isNew:false,badges:["hw"],desc:"M5: 10코어 GPU + Neural Accelerator, M4 대비 AI 성능 4배 이상. Broadcom 공동 개발 AI 서버 칩 'Baltra' 2026년 내부용 출시 예정. A18 Pro 기반 저가 MacBook(~$599) 출시 검토."}
+]},
+{rank:10,name:"Mistral AI",url:"https://mistral.ai",type:"유럽 AI 전문 기업",focus:"오픈소스·효율·AI 주권",products:[
+  {name:"Mistral Large 2 / Large 3",url:"https://mistral.ai/models/",isNew:false,badges:["llm"],desc:"유럽 최강 클로즈드 모델. 영·불·독·서·이탈 다국어 특화. Tesco 등 대형 기업과 파트너십. EU 데이터 주권 준수로 유럽 규제 시장 강점."},
+  {name:"Mistral 7B / Mixtral 8x22B (오픈소스)",url:"https://huggingface.co/mistralai",isNew:false,badges:["llm"],desc:"Mistral 7B: Apache 2.0 완전 오픈, 엣지·온프레미스 표준. Mixtral 8x22B: MoE 아키텍처로 대형 모델급 성능을 효율적으로 구현. 서방 오픈소스 AI의 대표 주자."},
+  {name:"Le Chat (AI 어시스턴트)",url:"https://chat.mistral.ai",isNew:false,badges:["agt"],desc:"초당 최대 1,000단어 생성 속도 — 업계 최고 수준. 유럽·기업 사용자 대상 ChatGPT 대안."},
+  {name:"Codestral",url:"https://mistral.ai/news/codestral/",isNew:false,badges:["code"],desc:"코딩 전용 특화 모델. 80개 이상 프로그래밍 언어 지원. VS Code·JetBrains IDE 플러그인 통합. 유럽 개발자에게 GitHub Copilot 대안으로 인기."},
+  {name:"Mistral API / La Plateforme",url:"https://console.mistral.ai",isNew:false,badges:["llm","agt"],desc:"개발자·기업용 모델 배포 플랫폼. Embed·파인튜닝·Function Calling·JSON 모드 지원. EU 데이터 주권 준수. 유럽 규제 환경에서 가장 유리한 AI API."}
+]}
+];
+
+function badges(arr){
+  return arr.map(c=>`<span class="badge b-${c}">${BL[c]||c}</span>`).join('');
+}
+
+function render(cat){
+  const main=document.getElementById('main');
+  let html=''; let r=1;
+  data.forEach(co=>{
+    const prods=cat==='all'?co.products:co.products.filter(p=>p.badges.includes(cat));
+    if(!prods.length)return;
+    html+=`<div class="company-block" style="animation-delay:${(r-1)*0.04}s">
+      <div class="col-rank"><span class="rank-num">${String(r).padStart(2,'0')}</span></div>
+      <div class="col-company">
+        <div class="co-name"><a href="${co.url}" target="_blank" rel="noopener">${co.name}<span class="ext">↗</span></a></div>
+        <div class="co-type">${co.type}</div>
+        <div class="co-focus">${co.focus}</div>
+      </div>
+      <div class="col-products">
+        ${prods.map(p=>`<div class="prod-item">
+          <div class="prod-header">
+            <a class="prod-name-link" href="${p.url}" target="_blank" rel="noopener">${p.name}${p.isNew?'<span class="new-dot">NEW</span>':''}<span class="ext">↗</span></a>
+            ${badges(p.badges)}
+          </div>
+          <div class="prod-desc">${p.desc}</div>
+        </div>`).join('')}
+      </div>
+    </div>`;
+    r++;
+  });
+  if(!html)html='<div class="empty">해당 카테고리의 프로그램이 없습니다.</div>';
+  main.innerHTML=html;
+}
+
+document.getElementById('toolbar').addEventListener('click',e=>{
+  const btn=e.target.closest('[data-cat]');
+  if(!btn)return;
+  document.querySelectorAll('.tag').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  render(btn.dataset.cat);
+});
+render('all');
+</script>
+</body>
+</html>
