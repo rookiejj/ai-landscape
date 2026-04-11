@@ -40,5 +40,9 @@ const data = [{
 7. 변경 사항 요약을 채팅으로 보고 (커밋은 내가 직접)
 
 ## 마지막 업데이트 기록
+- 2026-04-12: Anthropic $300억 ARR로 OpenAI 첫 추월, Coefficient Bio 인수,
+  Google·Broadcom 3.5GW 컴퓨트 딜, Gemini 3.1 Ultra(200만 토큰),
+  OpenAI ChatGPT Pro $100 요금제·TBPN 인수,
+  Mistral Forge·파리 데이터센터 $830M. Grok 4.20·Imagine NEW 해제
 - 2026-04-11: Claude Mythos+Glasswing, Meta Muse Spark, Gemma 4,
   Grok 4.20 멀티에이전트, GPT-5.5 Spud, Mistral Small 4 등

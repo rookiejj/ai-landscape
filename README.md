@@ -41,13 +41,13 @@ AI 관련 발표와 제품 출시가 하루가 멀다 하고 쏟아지는 지금
 - **제품·프로그램 목록** — 현재 활성 상태인 주요 AI 제품/서비스
 - **제품별 설명** — 기술 스펙 + 시장 맥락 (단순 스펙 나열 지양)
 - **카테고리 배지** — LLM / 이미지 / 비디오 / 에이전트 / 코딩 / UI 디자인 / 하드웨어 / 과학AI
-- **NEW 표시** — 최근 1개월 이내 출시·업데이트된 항목
+- **NEW 표시** — 최근 4~6주 이내 출시·업데이트된 항목
 - **공식 링크** — 기업명 및 제품명 클릭 시 해당 공식 페이지로 직접 이동
 
 ### UI 설계
 - 카테고리 필터로 원하는 분야만 빠르게 탐색 가능
 - 다크 테마, 반응형 (모바일 대응)
-- 단일 HTML 파일 — 외부 의존성 최소화 (Google Fonts 제외)
+- 경량 정적 페이지 — `index.html`(렌더링·스타일) + `data.js`(데이터·메타) 2개 파일, 외부 의존성 최소화 (Google Fonts 제외)
 
 ---
 
@@ -57,7 +57,7 @@ AI 관련 발표와 제품 출시가 하루가 멀다 하고 쏟아지는 지금
 
 ### 새 제품/항목 추가
 
-`index.html` 내 JavaScript `data` 배열에서 해당 기업 객체를 찾아 `products` 배열에 항목을 추가한다.
+`data.js`의 `data` 배열에서 해당 기업 객체를 찾아 `products` 배열에 항목을 추가한다. (렌더링 로직은 `index.html`에 있으며 거의 수정하지 않는다.)
 
 ```js
 {
@@ -113,12 +113,26 @@ AI 관련 발표와 제품 출시가 하루가 멀다 하고 쏟아지는 지금
 
 출시 후 약 4~6주가 지난 항목은 `isNew: false`로 변경해 배지를 제거한다.
 
+### META 갱신
+
+업데이트 시 `data.js` 최상단의 `META` 객체도 함께 수정한다. 이 값들은 헤더의 "Updated" 날짜 배지와 하이라이트 배지에 직접 사용된다.
+
+```js
+const META = {
+  year:  "2026",                    // 연도 (헤더 라벨·제목·서브카피에 사용)
+  month: "4",                       // 월 (서브카피에 사용)
+  date:  "April 12, 2026",          // 헤더 "Updated" 배지 표시 문자열
+  badge: "✦ 이번 업데이트 하이라이트 한 줄"  // 상단 요약 배지
+};
+```
+
 ---
 
 ## 버전 히스토리
 
 | 날짜 | 주요 변경 내용 |
 |---|---|
+| 2026-04-12 | Anthropic $300억 ARR로 OpenAI 첫 추월·Coefficient Bio 인수·Google·Broadcom 3.5GW 컴퓨트 딜, Google Gemini 3.1 Ultra(200만 토큰) 추가, OpenAI ChatGPT Pro $100/월 요금제·TBPN 인수, Mistral Forge·파리 데이터센터($830M) 추가. Grok 4.20·Grok Imagine NEW 해제 |
 | 2026-04-11 | Anthropic Claude Mythos + Project Glasswing, Meta Muse Spark(Superintelligence Labs), Google Gemma 4 오픈소스, xAI Grok 4.20 멀티에이전트·Grok 5·SpaceX 합병·Grok Imagine, OpenAI Sora 앱 종료·GPT-5.5 Spud·$1,220억 펀딩·사이버보안 제품, Mistral Small 4 추가 |
 | 2026-03-23 | 프로젝트명 ai-landscape → **ai-players** 로 변경 |
 | 2026-03-23 | Google Stitch, NVIDIA GTC 2026 (Isaac GR00T·Cosmos·DGX Spark·Nemotron 3 Super), OpenAI Desktop 슈퍼앱·GPT-5.4 mini, MS Copilot Tasks·MAI-Image-2, Meta Manus AI, Apple 신 Siri+Gemini 연동 추가 |
