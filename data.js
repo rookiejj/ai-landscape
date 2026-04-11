@@ -1,3 +1,9 @@
+const META = {
+  year:  "2026",
+  month: "4",
+  date:  "April 11, 2026",
+  badge: "✦ Anthropic Mythos · Meta Muse Spark · Google Gemma 4 · xAI Grok 4.20 · OpenAI $1,220억 펀딩 반영"
+};
 const BL={llm:"LLM",img:"이미지",vid:"비디오",agt:"에이전트",hw:"하드웨어",code:"코딩",sci:"과학AI",ui:"UI 디자인"};
 const data=[
 {rank:1,name:"OpenAI",url:"https://openai.com",type:"AI 전문 기업",focus:"범용 AGI 개발",products:[

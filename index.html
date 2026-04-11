@@ -80,12 +80,12 @@
 </head>
 <body>
 <header>
-  <div class="header-label">2026 · AI Players</div>
-  <h1>AI Players 2026</h1>
-  <p class="header-sub">2026년 4월 기준, AI 개발·인프라·통합을 주도하는 핵심 기업과 프로그램·제품 총망라. <span style="color:var(--accent2)">NEW</span> 표시는 2026년 4월 신규 출시·업데이트 항목. 기업명 및 제품명 클릭 시 공식 페이지로 이동.</p>
+  <div class="header-label" id="header-label"></div>
+  <h1 id="header-title"></h1>
+  <p class="header-sub" id="header-sub"></p>
   <div class="header-meta">
-    <span class="date-badge">Updated: April 11, 2026</span>
-    <span class="update-badge">✦ Anthropic Mythos · Meta Muse Spark · Google Gemma 4 · xAI Grok 4.20 · OpenAI $1,220억 펀딩 반영</span>
+    <span class="date-badge" id="header-date"></span>
+    <span class="update-badge" id="header-badge"></span>
   </div>
 </header>
 <nav class="toolbar" id="toolbar">
@@ -150,6 +150,12 @@ document.getElementById('toolbar').addEventListener('click',e=>{
   render(btn.dataset.cat);
 });
 render('all');
+document.getElementById('header-label').textContent = META.year + ' · AI Players';
+document.getElementById('header-title').textContent = 'AI Players ' + META.year;
+document.getElementById('header-sub').innerHTML = META.year + '년 ' + META.month + '월 기준, AI 개발·인프라·통합을 주도하는 핵심 기업과 프로그램·제품 총망라. <span style="color:var(--accent2)">NEW</span> 표시는 ' + META.year + '년 ' + META.month + '월 신규 출시·업데이트 항목. 기업명 및 제품명 클릭 시 공식 페이지로 이동.';
+document.getElementById('header-date').textContent = 'Updated: ' + META.date;
+document.getElementById('header-badge').textContent = META.badge;
+document.title = 'AI Players ' + META.year + ' — AI 주도 기업 10선';
 </script>
 </body>
 </html>
