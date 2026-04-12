@@ -29,9 +29,15 @@
   .header-label{font-family:'Syne',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.18em;color:var(--accent2);text-transform:uppercase;margin-bottom:14px;}
   h1{font-family:'Syne',sans-serif;font-size:clamp(28px,4vw,48px);font-weight:800;line-height:1.15;letter-spacing:-0.02em;margin-bottom:10px;}
   .header-sub{font-size:14px;color:var(--text2);line-height:1.7;max-width:580px;}
-  .header-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;}
-  .date-badge{font-size:11px;padding:4px 12px;border-radius:999px;background:var(--bg4);border:1px solid var(--border2);color:var(--text3);}
-  .update-badge{font-size:11px;padding:4px 12px;border-radius:999px;background:rgba(124,111,255,0.12);border:1px solid rgba(124,111,255,0.25);color:var(--accent2);}
+  .updates-panel{padding:20px 40px;border-bottom:1px solid var(--border);background:var(--bg2);}
+  .updates-header{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+  .updates-date{font-family:'Syne',sans-serif;font-size:12px;font-weight:600;color:var(--accent2);letter-spacing:0.04em;}
+  .updates-label{font-size:11px;color:var(--text3);letter-spacing:0.06em;text-transform:uppercase;}
+  .updates-list{list-style:none;display:flex;flex-direction:column;gap:6px;}
+  .updates-list li{font-size:12.5px;color:var(--text2);line-height:1.65;padding-left:14px;position:relative;}
+  .updates-list li::before{content:'';position:absolute;left:0;top:9px;width:5px;height:5px;border-radius:50%;background:var(--accent);opacity:0.6;}
+  .updates-toggle{display:inline-flex;align-items:center;gap:4px;margin-top:10px;font-size:12px;color:var(--accent2);background:none;border:1px solid rgba(124,111,255,0.25);padding:4px 12px;border-radius:999px;cursor:pointer;font-family:'Noto Sans KR',sans-serif;transition:all 0.18s;}
+  .updates-toggle:hover{background:rgba(124,111,255,0.1);border-color:rgba(124,111,255,0.4);}
   .toolbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:16px 40px;border-bottom:1px solid var(--border);background:rgba(19,19,22,0.92);position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);}
   .filter-label{font-size:11px;color:var(--text3);letter-spacing:0.08em;text-transform:uppercase;margin-right:4px;white-space:nowrap;}
   .tag{font-size:12px;font-weight:500;padding:5px 14px;border-radius:999px;border:1px solid var(--border2);color:var(--text2);cursor:pointer;background:transparent;transition:all 0.18s;font-family:'Noto Sans KR',sans-serif;}
@@ -74,7 +80,7 @@
   .empty{text-align:center;padding:80px 20px;color:var(--text3);font-size:14px;}
   .legend{display:flex;flex-wrap:wrap;gap:10px;padding:14px 40px;border-top:1px solid var(--border);background:var(--bg2);}
   .legend-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text3);}
-  @media(max-width:900px){header,main,.toolbar,.legend{padding-left:20px;padding-right:20px;}.company-block{grid-template-columns:48px 160px 1fr;}.rank-num{font-size:20px;}}
+  @media(max-width:900px){header,main,.toolbar,.legend,.updates-panel{padding-left:20px;padding-right:20px;}.company-block{grid-template-columns:48px 160px 1fr;}.rank-num{font-size:20px;}}
   @media(max-width:640px){.company-block{grid-template-columns:1fr;}.col-rank{flex-direction:row;padding:12px 16px;gap:8px;border-right:none;border-bottom:1px solid var(--border);}.col-company{border-right:none;border-bottom:1px solid var(--border);}}
 </style>
 </head>
@@ -83,11 +89,8 @@
   <div class="header-label" id="header-label"></div>
   <h1 id="header-title"></h1>
   <p class="header-sub" id="header-sub"></p>
-  <div class="header-meta">
-    <span class="date-badge" id="header-date"></span>
-    <span class="update-badge" id="header-badge"></span>
-  </div>
 </header>
+<section class="updates-panel" id="updates-panel"></section>
 <nav class="toolbar" id="toolbar">
   <span class="filter-label">필터</span>
   <button class="tag active" data-cat="all">전체</button>
@@ -112,6 +115,7 @@
   <div class="legend-item"><span class="badge b-sci">과학AI</span>과학·연구 AI</div>
 </footer>
 <script src="data.js"></script>
+<script src="updates.js"></script>
 <script>
 function badges(arr){return arr.map(c=>`<span class="badge b-${c}">${BL[c]||c}</span>`).join('');}
 function render(cat){
@@ -153,9 +157,35 @@ render('all');
 document.getElementById('header-label').textContent = META.year + ' · AI Players';
 document.getElementById('header-title').textContent = 'AI Players ' + META.year;
 document.getElementById('header-sub').innerHTML = META.year + '년 ' + META.month + '월 기준, AI 개발·인프라·통합을 주도하는 핵심 기업과 프로그램·제품 총망라. <span style="color:var(--accent2)">NEW</span> 표시는 ' + META.year + '년 ' + META.month + '월 신규 출시·업데이트 항목. 기업명 및 제품명 클릭 시 공식 페이지로 이동.';
-document.getElementById('header-date').textContent = 'Updated: ' + META.date;
-document.getElementById('header-badge').textContent = META.badge;
 document.title = 'AI Players ' + META.year + ' — AI 주도 기업 10선';
+
+/* --- Updates panel --- */
+(function(){
+  if(typeof UPDATES==='undefined'||!UPDATES.length)return;
+  var latest=UPDATES[0], entries=latest.entries, max=4;
+  var panel=document.getElementById('updates-panel');
+  var html='<div class="updates-header"><span class="updates-label">Latest Updates</span><span class="updates-date">'+latest.date+'</span></div>';
+  html+='<ul class="updates-list">';
+  entries.forEach(function(e,i){
+    html+='<li'+(i>=max?' style="display:none" data-extra':'')+'>' + e + '</li>';
+  });
+  html+='</ul>';
+  if(entries.length>max){
+    var rest=entries.length-max;
+    html+='<button class="updates-toggle" id="updates-toggle">외 '+rest+'건 ▸ 더보기</button>';
+  }
+  panel.innerHTML=html;
+  var btn=document.getElementById('updates-toggle');
+  if(btn){
+    var expanded=false;
+    btn.addEventListener('click',function(){
+      expanded=!expanded;
+      var extras=panel.querySelectorAll('[data-extra]');
+      for(var i=0;i<extras.length;i++) extras[i].style.display=expanded?'':'none';
+      btn.textContent=expanded?'간단히 ◂':'외 '+(entries.length-max)+'건 ▸ 더보기';
+    });
+  }
+})();
 </script>
 </body>
 </html>
