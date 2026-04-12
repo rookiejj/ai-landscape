@@ -1,5 +1,5 @@
 /**
- * updates.js — AI Players 업데이트 로그
+ * update.js — AI Players 업데이트 로그
  *
  * 각 기업의 모델·제품·펀딩·인수 등 콘텐츠 변경 사항을
  * 날짜별로 기록한다. 소스코드 구조 변경은 README.md에 별도 관리.
