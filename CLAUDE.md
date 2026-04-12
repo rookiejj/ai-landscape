@@ -46,6 +46,8 @@ const data = [{
 - **README.md 버전 히스토리** — 개발자/기여자 대상. 소스코드 구조 변경, 파일 추가/삭제, UI 로직 수정 등 기술적 변경만 기록.
 
 ## 마지막 업데이트 기록
+- 2026-04-13: Mistral Voxtral TTS(오픈웨이트 음성 합성) 수록,
+  Microsoft Copilot Cowork(M365 자율 실행 레이어) 수록
 - 2026-04-12: Anthropic $300억 ARR로 OpenAI 첫 추월, Coefficient Bio 인수,
   Google·Broadcom 3.5GW 컴퓨트 딜, Gemini 3.1 Ultra(200만 토큰),
   OpenAI ChatGPT Pro $100 요금제·TBPN 인수,

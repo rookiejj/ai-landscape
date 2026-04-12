@@ -1,9 +1,4 @@
-const META = {
-  year:  "2026",
-  month: "4",
-  date:  "April 12, 2026",
-  badge: "✦ Anthropic $300억 ARR로 OpenAI 첫 추월 · Coefficient Bio 인수 · Google·Broadcom 3.5GW 딜 · Gemini 3.1 Ultra · Mistral Forge"
-};
+const META = { year: "2026", month: "4" };
 const BL={llm:"LLM",img:"이미지",vid:"비디오",agt:"에이전트",hw:"하드웨어",code:"코딩",sci:"과학AI",ui:"UI 디자인"};
 const data=[
 {rank:1,name:"OpenAI",url:"https://openai.com",type:"AI 전문 기업",focus:"범용 AGI 개발",products:[
@@ -52,7 +47,7 @@ const data=[
 ]},
 {rank:6,name:"Microsoft",url:"https://microsoft.com/en-us/ai",type:"빅테크 (AI 통합 전략)",focus:"생산성 AI 전면 통합",products:[
   {name:"Microsoft Copilot (M365 통합)",url:"https://copilot.microsoft.com",isNew:false,badges:["agt","code"],desc:"Word·Excel·Outlook·Teams·Windows·Azure 전 제품군 AI화. 멀티 에이전트 오케스트레이션. Anthropic에 $50억 투자. Azure AI 성장률 34% YoY. Mustafa Suleyman: 현재 프론티어 모델 자체 개발 역량 부족 인정, 2026년 말까지 컴퓨팅 규모 확보 목표."},
-  {name:"Copilot Tasks",url:"https://copilot.microsoft.com",isNew:false,badges:["agt"],desc:"백그라운드 영구 에이전트. 자연어로 목표 기술 시 스케줄링·구독 관리·모니터링·콘텐츠 초안 독립 처리. 중요 행동 전 사용자 승인 요청."},
+  {name:"Copilot Cowork",url:"https://www.microsoft.com/en-us/microsoft-365/blog/2026/03/30/copilot-cowork-now-available-in-frontier/",isNew:true,badges:["agt"],desc:"3/30 Frontier 프로그램 GA. 단순 프롬프트-응답을 넘어 다단계 장기 실행 태스크를 M365 내에서 자율 수행. Work IQ로 전체 업무 맥락 파악, 진행 중 사용자 개입 가능. Anthropic Claude 협업 개발. M365 보안·거버넌스·감사 경계 내 운영. 기존 Copilot Tasks를 대체하는 실행 레이어."},
   {name:"Azure OpenAI Service",url:"https://azure.microsoft.com/en-us/products/ai-services/openai-service",isNew:false,badges:["llm","agt"],desc:"OpenAI 최신 모델을 기업 환경에서 안전하게 활용하는 완전관리형 플랫폼. 대기업 AI 채택의 핵심 채널. Anthropic 모델도 Azure에서 제공."},
   {name:"MAI-Image-2",url:"https://microsoft.com/en-us/ai",isNew:false,badges:["img"],desc:"Microsoft 슈퍼인텔리전스 팀 개발 자체 텍스트→이미지 모델. 현실감·조명·텍스트 렌더링 대폭 개선. 포스터·인포그래픽 실무 최적화."},
   {name:"Phi-4 / Phi-4 Multimodal / Fara-7B",url:"https://azure.microsoft.com/en-us/products/phi",isNew:false,badges:["llm"],desc:"Phi-4: 3.8B~5.6B 경량 멀티모달. Fara-7B: 브라우저 에이전트·컴퓨터 제어 특화 소형 모델(오픈소스). 엣지·온프레미스 배포 특화."},
@@ -87,6 +82,7 @@ const data=[
   {name:"파리 데이터센터 + $830M 부채 펀딩",url:"https://mistral.ai",isNew:true,badges:["hw"],desc:"3/30 $8.3억 규모 부채 펀딩으로 파리 인근 Bruyères-le-Châtel 자체 데이터센터 구축. 13,800개 NVIDIA GPU 배치, 초기 용량 44MW, 2026년 하반기 가동. 유럽 AI 주권 인프라의 첫 대규모 실물 구현."},
   {name:"Mixtral 8x22B / Mistral 7B (오픈소스)",url:"https://huggingface.co/mistralai",isNew:false,badges:["llm"],desc:"Mixtral 8x22B: MoE 아키텍처로 대형 모델급 성능 효율적 구현. Mistral 7B: 엣지·온프레미스 표준. 서방 오픈소스 AI의 대표 주자."},
   {name:"Le Chat (AI 어시스턴트)",url:"https://chat.mistral.ai",isNew:false,badges:["agt"],desc:"초당 최대 1,000단어 생성 속도 — 업계 최고 수준. 유럽·기업 사용자 대상 ChatGPT 대안."},
+  {name:"Voxtral TTS",url:"https://mistral.ai/news/voxtral-tts",isNew:true,badges:["llm"],desc:"3월 26일 출시. 업계 최초 프론티어급 오픈웨이트 TTS 모델(4B 파라미터). ElevenLabs Flash v2.5 대비 자연스러움 우위, v3과 동등 품질. 9개 언어·제로샷 음성 복제·감정 스티어링·실시간 스트리밍. CC BY-NC 4.0 라이선스. API $0.016/1K 글자. Voxtral 음성 스택 완성."},
   {name:"Codestral",url:"https://mistral.ai/news/codestral/",isNew:false,badges:["code"],desc:"코딩 전용 특화 모델. 80개 이상 프로그래밍 언어 지원. VS Code·JetBrains IDE 플러그인 통합."},
   {name:"Mistral API / La Plateforme",url:"https://console.mistral.ai",isNew:false,badges:["llm","agt"],desc:"개발자·기업용 모델 배포 플랫폼. EU 데이터 주권 준수. 유럽 규제 환경에서 가장 유리한 AI API."}
 ]}

@@ -6,6 +6,13 @@
  */
 const UPDATES = [
   {
+    date: "2026-04-13",
+    entries: [
+      "Mistral AI — Voxtral TTS 수록: 업계 최초 프론티어급 오픈웨이트 음성 합성 모델(4B 파라미터), ElevenLabs 대비 자연스러움 우위, 9개 언어·제로샷 음성 복제 지원으로 Voxtral 음성 스택 완성",
+      "Microsoft — Copilot Cowork 수록: M365 내 다단계 장기 실행 자율 태스크 실행 레이어, Anthropic Claude 협업 개발, 3/30 Frontier 프로그램 GA"
+    ]
+  },
+  {
     date: "2026-04-12",
     entries: [
       "Anthropic — 연환산 매출 $300억으로 OpenAI 최초 추월, 바이오 AI 스타트업 Coefficient Bio 인수",
