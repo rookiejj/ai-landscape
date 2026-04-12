@@ -130,14 +130,15 @@ const META = {
 
 ## 버전 히스토리
 
+> 콘텐츠 변경 사항(모델·제품·펀딩·인수 등)은 [`updates.js`](updates.js)에서 확인할 수 있습니다.
+> 아래는 소스코드 구조·UI 로직 등 기술적 변경만 기록합니다.
+
 | 날짜 | 주요 변경 내용 |
 |---|---|
-| 2026-04-12 | Anthropic $300억 ARR로 OpenAI 첫 추월·Coefficient Bio 인수·Google·Broadcom 3.5GW 컴퓨트 딜, Google Gemini 3.1 Ultra(200만 토큰) 추가, OpenAI ChatGPT Pro $100/월 요금제·TBPN 인수, Mistral Forge·파리 데이터센터($830M) 추가. Grok 4.20·Grok Imagine NEW 해제 |
-| 2026-04-11 | Anthropic Claude Mythos + Project Glasswing, Meta Muse Spark(Superintelligence Labs), Google Gemma 4 오픈소스, xAI Grok 4.20 멀티에이전트·Grok 5·SpaceX 합병·Grok Imagine, OpenAI Sora 앱 종료·GPT-5.5 Spud·$1,220억 펀딩·사이버보안 제품, Mistral Small 4 추가 |
+| 2026-04-12 | 변경 로그 이원화: `updates.js` 신설(콘텐츠 변경), README는 기술 변경만 기록 |
 | 2026-03-23 | 프로젝트명 ai-landscape → **ai-players** 로 변경 |
-| 2026-03-23 | Google Stitch, NVIDIA GTC 2026 (Isaac GR00T·Cosmos·DGX Spark·Nemotron 3 Super), OpenAI Desktop 슈퍼앱·GPT-5.4 mini, MS Copilot Tasks·MAI-Image-2, Meta Manus AI, Apple 신 Siri+Gemini 연동 추가 |
 | 2026-03-22 | 전체 제품별 공식 링크 추가 (기업명 + 모든 제품명 클릭 가능) |
-| 2026-03-21 | DeepSeek·Alibaba 제거, Apple·Mistral AI로 교체 |
+| 2026-03-21 | 수록 기업 슬롯 구조 변경: DeepSeek·Alibaba → Apple·Mistral AI |
 | 2026-03-20 | 최초 작성 |
 
 ---
